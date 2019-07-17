@@ -6,25 +6,25 @@
  * Emergency Room Simulator
  */
 
-#ifndef DOCTOR_H
-#define DOCTOR_H
+#ifndef NURSE_H
+#define NURSE_H
 #include "Random.h"
 using namespace std;
 
 Random num;
 
-class Doctor{
+class Nurse{
 private:
     int service_time;
 
 public:
-    Doctor(){
+    Nurse(){
         service_time = 0;
         random_service();
     }
 
     void random_service(){
-        service_time = num.random_doc_service();
+        service_time = num.random_nurse_service();
     }
 
     int get_service_time(){
@@ -34,4 +34,4 @@ public:
 
 };
 
-#endif // DOCTOR_H
+#endif // NURSE_H

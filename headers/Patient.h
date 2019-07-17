@@ -19,12 +19,8 @@ using std::vector;
 
 class Patient{
 private:
-    
     int arrival_time;
-
     int discharge_time;
-    
-
 public:
     Current_Visit * visit;
     Person *person;

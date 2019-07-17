@@ -10,16 +10,16 @@
 #define SERVICEMAP_H
 #include <map>
 #include <utility>
-#include <vector>
 #include "Patient.h"
 #include "Doctor.h"
+#include "Nurse.h"
 using namespace std;
 
 class ServiceMap{
 private:
-    /*map<Doctor, Patient*> doctors;*/
-    map<string, Patient*> nurses;
-    vector<map<Doctor, Patient*>> doctors;
+    map<Doctor*, Patient*> doctors;
+    map<Nurse*, Patient*> nurses;
+    //vector<map<Doctor*, Patient*>> doctors;
     int nurse_number = 1;
     int num_nurses;
     int num_doctors;
@@ -31,11 +31,25 @@ public:
         this->num_nurses = num_nurses;
     }
 
-    void update(){
-        if(nurse_is_full()){
-            for(map<string, Patient *>::iterator i = nurse.lower_bound("nurse1"); i != gondor.upper_bound("Aragorn"); i++)
-        cout << i->first << ": " << i->second << endl;
-        }
+    void update(int clock){
+        //if(doctor_is_full()){
+            for(map<Doctor *, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ++i){
+                if(clock - i->second->visit->get_start_service_time() >= i->first->get_service_time()){
+                    i->second->visit->set_discharge_time(clock);
+                    i->second->person->medical_history->add_visit(i->second->visit);
+                    i->second->person->set_can_admit();
+                    doctors.erase(i);
+                }
+            }
+            for(map<Nurse*, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ++i){
+                if(clock - i->second->visit->get_start_service_time() >= i->first->get_service_time()){
+                    i->second->visit->set_discharge_time(clock);
+                    i->second->person->medical_history->add_visit(i->second->visit);
+                    i->second->person->set_can_admit();
+                    doctors.erase(i);
+                }
+            }
+        //}
     }
 
     int get_doctors_size(){
@@ -47,7 +61,7 @@ public:
     }
 
     void service_patient_doctor(Patient *patient, int clock){
-        doctors.insert(make_pair( Doctor , patient ));
+        doctors.insert(make_pair(new Doctor, patient));
         patient->visit->set_start_service_time(clock);
     }
     

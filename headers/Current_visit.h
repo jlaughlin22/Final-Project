@@ -46,9 +46,13 @@ public:
     
     void set_discharge_time(int clock){
         discharge_time = clock;
+        visit_time = discharge_time - arrival_time;
     }
     void set_start_service_time(int clock){
         start_service_time = clock;
+    }
+    int get_start_service_time(){
+        return start_service_time;
     }
 
     void update(int clock){}

@@ -35,6 +35,7 @@ public:
     }
 
     void update(int clock){
+        Emergancy_Room->update(clock);
         if((rand() / RAND_MAX) < arrival_rate){
             int possible_patient;
             do{
@@ -42,9 +43,9 @@ public:
             }while(town[possible_patient]->can_admit != true);
             Patient * new_pat = new Patient(clock, town[possible_patient]);
             current_patients.push(new_pat);
-            if(new_pat->person->get_has_record() == false){
+            /* if(new_pat->person->get_has_record() == false){
                 patient_records.push_back(new Medical_Records(new_pat));
-            }
+            }*/
         }
         if(!current_patients.empty()){
             if(current_patients.top()->visit->get_illness_severity() < 11){
@@ -55,7 +56,7 @@ public:
                     Emergancy_Room->service_patient_doctor(current_patients.top(), clock);
                     current_patients.pop();
                 }else{
-                    Emergancy_Room->update();
+                    Emergancy_Room->update(clock);
                 }
             }
             //update service map

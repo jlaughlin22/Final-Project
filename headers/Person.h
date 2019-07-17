@@ -12,41 +12,50 @@
 #include <string>
 #include <vector>
 #include "Current_visit.h"
+#include "Medical_Records.h"
 using std::string;
 using std::vector;
 
 class Person{
 private:
-
-    bool has_record;
+    //bool has_record;
     int age;
 public:
     std::string name;
     bool can_admit;
+    Medical_Records *medical_history;
     Person(int age, string name, int clock){
         this->age = age;
         this->name = name;
         can_admit = true;
-        has_record = false;
+        //has_record = false;
+        medical_history = new Medical_Records();
+    }
+
+    Medical_Records * get_med_record(){
+        return medical_history;
     }
     
-    void set_has_record(){
+    /* void set_has_record(){
         has_record = !has_record;
-    }
+    }*/
     
     bool get_can_admit(){
         return can_admit;
     }
 
-    bool get_has_record(){
+    /*bool get_has_record(){
         return has_record;
-    }
+    }*/
 
     void set_can_admit(){
         can_admit = !can_admit;
     }
 
     int get_age(){ return age; }
+
+    
+
 
 };
 

@@ -19,10 +19,8 @@ using namespace std;
 
 class ServiceMap{
 private:
-    map<int, Patient*> doctors;
-    map<int, Patient*> nurses;
-    Random my_ran;
-    multimap<int, Patient*> service_map;
+    map<Doctor *, Patient*> doctors;
+    map<Nurse *, Patient*> nurses;
     int num_nurses;
     int num_doctors;
 
@@ -34,9 +32,9 @@ public:
     }
 
     void update_doctor(int clock){
-        for(map<int, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
+        for(map<Doctor *, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
             cout << "check1Doctor" << endl;
-            if(clock - (i->second->visit->get_start_service_time()) > i->first){
+            if(clock - (i->second->visit->get_start_service_time()) > i->first->get_service_time()){
                 i->second->visit->set_discharge_time(clock);
                 i->second->person->medical_history->add_visit(i->second->visit);
                 i->second->person->set_can_admit();
@@ -49,9 +47,9 @@ public:
         }
     }
     void update_nurse(int clock){
-        for(map<int, Patient *>::iterator i = nurses.begin(); i != nurses.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
+        for(map<Nurses *, Patient *>::iterator i = nurses.begin(); i != nurses.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
             cout << "check1Nurse" << endl;
-            if(clock - (i->second->visit->get_start_service_time()) > i->first){
+            if(clock - (i->second->visit->get_start_service_time()) > i->first->){
                 i->second->visit->set_discharge_time(clock);
                 i->second->person->medical_history->add_visit(i->second->visit);
                 i->second->person->set_can_admit();

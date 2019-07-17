@@ -11,10 +11,8 @@
 #define PERSON_H
 #include <string>
 #include <vector>
-#include "Current_visit.h"
 #include "Medical_Records.h"
-using std::string;
-using std::vector;
+using namespace std;
 
 class Person{
 private:
@@ -24,7 +22,7 @@ public:
     std::string name;
     bool can_admit;
     Medical_Records *medical_history;
-    Person(int age, string name, int clock){
+    Person(int age, string name){
         this->age = age;
         this->name = name;
         can_admit = true;

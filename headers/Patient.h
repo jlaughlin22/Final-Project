@@ -8,14 +8,11 @@
 
 
 #ifndef PATIENT_H
-#define PACIENT_H
-#include <string>
-#include "Current_visit.h"
+#define PATIENT_H
+//#include <string>
 #include "Person.h"
 #include <vector>
-#include "Current_visit.h"
-using std::string;
-using std::vector;
+using namespace std;
 
 class Patient{
 private:

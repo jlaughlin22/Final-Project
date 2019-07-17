@@ -8,7 +8,6 @@
 
 #ifndef MEDICAL_RECORDS_H
 #define MEDICAL_RECORDS_H
-#include "Person.h"
 #include "Current_visit.h"
 #include <vector>
 using std::vector;
@@ -19,11 +18,8 @@ private:
     vector<Current_Visit *> visit_record;
 
 public:
-    Patient *patient;
-    Medical_Records(){}
-    Medical_Records(Patient *patient){
+    Medical_Records(){
         number_visits = 0;
-        this->patient = patient;
     }
 
     

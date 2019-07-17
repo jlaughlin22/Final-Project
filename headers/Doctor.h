@@ -11,10 +11,11 @@
 #include "Random.h"
 using namespace std;
 
-Random num;
+
 
 class Doctor{
 private:
+    Random num;
     int service_time;
 
 public:

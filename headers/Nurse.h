@@ -11,10 +11,9 @@
 #include "Random.h"
 using namespace std;
 
-Random num;
-
 class Nurse{
 private:
+    Random num;
     int service_time;
 
 public:

@@ -33,6 +33,7 @@
         "system_error": "cpp",
         "type_traits": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "unordered_set": "cpp"
     }
 }

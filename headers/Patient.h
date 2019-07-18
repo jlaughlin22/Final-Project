@@ -18,14 +18,18 @@ class Patient{
 private:
     int arrival_time;
     int discharge_time;
-public:
     Current_Visit * visit;
-    Person *person;
-    Patient(int clock, Person *person){
+public:
+    Person * person;
+    Patient(int clock, Person * person){
         this->person = person;
         arrival_time = clock;
         discharge_time = -1;
         visit = new Current_Visit(arrival_time);
+    }
+
+    Current_Visit * get_visit(){
+        return visit;
     }
 
 	bool operator< (const Patient& other) const {

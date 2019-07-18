@@ -15,9 +15,8 @@
 using namespace std;
 
 class Person{
-private:
-    int age;
 public:
+    int age;
     std::string name;
     bool can_admit;
     Medical_Records *medical_history;
@@ -45,8 +44,6 @@ public:
         cout << "Age: " << age << endl;
         medical_history->print_medical_record();
     }
-    
-
 
 };
 

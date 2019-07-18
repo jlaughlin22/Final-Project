@@ -8,8 +8,6 @@
 
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
-//#include "Medical_Records.h"
-//#include "Person.h"
 #include "Patient.h"
 #include "ServiceRoom.h"
 #include <queue>
@@ -21,12 +19,11 @@ extern Random my_num;
 
 class Hospital{
 private:
-    
     vector<Person *> town;
     priority_queue<Patient *> current_patients;
     vector<Patient*> patient_records;
     double arrival_rate;
-    ServiceRoom * Emergancy_Room;
+    ServiceRoom * Emergency_Room;
     int number_doctors;
     int number_nurses;
 
@@ -36,7 +33,7 @@ public:
         this->arrival_rate = arrival_rate / 60.0;
         this->number_doctors = number_doctors;
         this->number_nurses = number_nurses;
-        Emergancy_Room = new ServiceRoom(number_doctors, number_nurses);
+        Emergency_Room = new ServiceRoom(number_doctors, number_nurses);
     }
 
     void update(int clock){
@@ -54,30 +51,28 @@ public:
             //cout << "New person in waiting room" << endl;
         }
         if(!current_patients.empty()){
-            //Emergancy_Room->update_doctor(clock);
-            //Emergancy_Room->update_nurse(clock);
-            if(current_patients.top()->visit->get_illness_severity() < 11){
-                if(!Emergancy_Room->nurse_is_full()){
-                    Emergancy_Room->service_patient_nurse(current_patients.top(), clock);
+            if(current_patients.top()->get_visit()->get_illness_severity() < 11){
+                if(!Emergency_Room->nurse_is_full()){
+                    Emergency_Room->service_patient_nurse(current_patients.top(), clock);
                     current_patients.pop();
-                }else if(!Emergancy_Room->doctor_is_full()){
-                    Emergancy_Room->service_patient_doctor(current_patients.top(), clock);
+                }else if(!Emergency_Room->doctor_is_full()){
+                    Emergency_Room->service_patient_doctor(current_patients.top(), clock);
                     current_patients.pop();
                 }else{
-                    if(Emergancy_Room->get_doctors_size()!=0){
-                        Emergancy_Room->update_doctor(clock);
+                    if(Emergency_Room->get_doctors_size()!=0){
+                        Emergency_Room->update_doctor(clock);
                     }
-                    if(Emergancy_Room->get_nurses_size()!=0){
-                        Emergancy_Room->update_nurse(clock);
+                    if(Emergency_Room->get_nurses_size()!=0){
+                        Emergency_Room->update_nurse(clock);
                     }
                 }
-            }else if(current_patients.top()->visit->get_illness_severity() < 21){
-                if(!Emergancy_Room->doctor_is_full()){
-                    Emergancy_Room->service_patient_doctor(current_patients.top(), clock);
+            }else if(current_patients.top()->get_visit()->get_illness_severity() < 21){
+                if(!Emergency_Room->doctor_is_full()){
+                    Emergency_Room->service_patient_doctor(current_patients.top(), clock);
                     current_patients.pop();
                 }else{
-                    if(Emergancy_Room->get_doctors_size()!=0){
-                        Emergancy_Room->update_doctor(clock);
+                    if(Emergency_Room->get_doctors_size()!=0){
+                        Emergency_Room->update_doctor(clock);
                     }
                 }
             }

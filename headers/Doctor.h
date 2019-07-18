@@ -8,30 +8,18 @@
 
 #ifndef DOCTOR_H
 #define DOCTOR_H
-#include "Random.h"
+#include "Caretaker.h"
 using namespace std;
 
-extern Random my_num;
-
-class Doctor{
-private:
-    int service_time;
-
+class Doctor: public Caretaker{
 public:
-    Doctor(){
-        service_time = 0;
+    Doctor(): Caretaker(){
         random_service();
     }
 
     void random_service(){
         service_time = my_num.random_time(20);
     }
-
-    int get_service_time(){
-        return service_time;
-    }
-
-
 };
 
 #endif // DOCTOR_H

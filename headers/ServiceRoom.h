@@ -14,13 +14,13 @@
 #include "Patient.h"
 #include "Doctor.h"
 #include "Nurse.h"
-#include "Random.h"
+#include"Caretaker.h"
 using namespace std;
 
 class ServiceRoom{
 private:
-    map<Doctor *, Patient*> doctors;
-    map<Nurse *, Patient*> nurses;
+    map<Curetaker *, Patient*> doctors;
+    map<Curetaker *, Patient*> nurses;
     int num_nurses;
     int num_doctors;
 public:
@@ -30,10 +30,10 @@ public:
     }
 
     void update_doctor(int clock){
-        for(map<Doctor *, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
-            if(clock - (i->second->visit->get_start_service_time()) > i->first->get_service_time()){
-                i->second->visit->set_discharge_time(clock);
-                i->second->person->medical_history->add_visit(i->second->visit);
+        for(map<Curetaker *, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
+            if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
+                i->second->get_visit()->set_discharge_time(clock);
+                i->second->person->medical_history->add_visit(i->second->get_visit());
                 i->second->person->set_can_admit();
                 i = doctors.erase(i);
             }else{
@@ -42,10 +42,10 @@ public:
         }
     }
     void update_nurse(int clock){
-        for(map<Nurse *, Patient *>::iterator i = nurses.begin(); i != nurses.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
-            if(clock - (i->second->visit->get_start_service_time()) > i->first->get_service_time()){
-                i->second->visit->set_discharge_time(clock);
-                i->second->person->medical_history->add_visit(i->second->visit);
+        for(map<CureTaker *, Patient *>::iterator i = nurses.begin(); i != nurses.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
+            if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
+                i->second->get_visit()->set_discharge_time(clock);
+                i->second->person->medical_history->add_visit(i->second->get_visit());
                 i->second->person->set_can_admit();
                 i = nurses.erase(i);
             }else{
@@ -64,12 +64,12 @@ public:
 
     void service_patient_doctor(Patient *patient, int clock){
         doctors.insert(make_pair(new Doctor , patient));
-        patient->visit->set_start_service_time(clock);
+        patient->get_visit()->set_start_service_time(clock);
     }
     
     void service_patient_nurse(Patient *patient, int clock){
         nurses.insert(make_pair(new Nurse, patient ));
-        patient->visit->set_start_service_time(clock);
+        patient->get_visit()->set_start_service_time(clock);
     }
 
     bool nurse_is_full(){

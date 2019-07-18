@@ -14,16 +14,17 @@
 #include "ServiceMap.h"
 #include <queue>
 #include <vector>
-#include "Rand.h"
+#include "Random.h"
 using namespace std;
+
+extern Random my_num;
 
 class Hospital{
 private:
-Rand my_num;
+    
     vector<Person *> town;
     priority_queue<Patient *> current_patients;
-    vector<Medical_Records *> patient_records;
-
+    vector<Patient*> patient_records;
     double arrival_rate;
     ServiceMap * Emergancy_Room;
     int number_doctors;
@@ -39,27 +40,28 @@ public:
     }
 
     void update(int clock){
-        if((my_num.next_double()) < arrival_rate){
+        if(my_num.random_dbl() < arrival_rate){
             int possible_patient;
             do{
-                possible_patient = (rand()%2000);
+                possible_patient = (my_num.random_person());
             }while(town[possible_patient]->can_admit != true);
             Patient * new_pat = new Patient(clock, town[possible_patient]);
             current_patients.push(new_pat);
+            if(check_insert(new_pat)){
+                patient_records.push_back(new_pat);
+            }
             new_pat->person->set_can_admit();
-            cout << "New person in waiting room" << endl;
+            //cout << "New person in waiting room" << endl;
         }
         if(!current_patients.empty()){
-            Emergancy_Room->update_doctor(clock);
-            Emergancy_Room->update_nurse(clock);
+            //Emergancy_Room->update_doctor(clock);
+            //Emergancy_Room->update_nurse(clock);
             if(current_patients.top()->visit->get_illness_severity() < 11){
                 if(!Emergancy_Room->nurse_is_full()){
                     Emergancy_Room->service_patient_nurse(current_patients.top(), clock);
-                    cout << "service nurse patient, severity: " << current_patients.top()->visit->get_illness_severity() << endl;
                     current_patients.pop();
                 }else if(!Emergancy_Room->doctor_is_full()){
                     Emergancy_Room->service_patient_doctor(current_patients.top(), clock);
-                    cout << "service doctor patient, severity: " << current_patients.top()->visit->get_illness_severity() << endl;
                     current_patients.pop();
                 }else{
                     if(Emergancy_Room->get_doctors_size()!=0){
@@ -72,19 +74,29 @@ public:
             }else if(current_patients.top()->visit->get_illness_severity() < 21){
                 if(!Emergancy_Room->doctor_is_full()){
                     Emergancy_Room->service_patient_doctor(current_patients.top(), clock);
-                    cout << "service doctor patient, severity: " << current_patients.top()->visit->get_illness_severity() << endl;
                     current_patients.pop();
                 }else{
                     if(Emergancy_Room->get_doctors_size()!=0){
                         Emergancy_Room->update_doctor(clock);
                     }
                 }
-                //Emergancy_Room->update_doctor(clock);
             }
-            //update service map
-            //if queue is full unable to service front so do nothing else move to one of the service queue's
-            //based on priority and whether or not nurse service or doctor service is full move it or leave it
         }
+    }
+    bool check_insert(Patient* patient){
+        for(int i = 0; i < patient_records.size(); i++){
+            if (patient_records[i]->person == patient->person){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void records(){
+        cout << patient_records.size();
+        /*for (int i = 0; i < patient_records.size(); i++){
+            patient_records[i]->person->print_medical_record();
+        }*/
     }
 
     void menu(){

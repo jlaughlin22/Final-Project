@@ -9,8 +9,10 @@
 #ifndef CURRENT_VISIT_H
 #define CURRENT_VISIT_H
 #include "Random.h"
+#include <iostream>
+using namespace std;
 
-Random ran_Num;
+extern Random my_num;
 
 class Current_Visit{
 private:
@@ -18,26 +20,17 @@ private:
     int visit_time;
     int arrival_time;
     int start_service_time;
-    int service_time;
     int discharge_time;
 
     void set_illness_severity(){
-        ran_Num.random_probability();
-        illness_severity = ran_Num.random_severity();
+        my_num.random_probability();
+        illness_severity = my_num.random_severity();
     }
 
 public:
     Current_Visit(int arrival_time){
         set_illness_severity();
         this->arrival_time = arrival_time;
-    }
-
-    void set_doc_service_time(){
-        service_time = ran_Num.random_doc_service();
-    }
-
-    void set_nurse_service_time(){
-        service_time = ran_Num.random_nurse_service();
     }
     
     int get_illness_severity(){
@@ -55,7 +48,13 @@ public:
         return start_service_time;
     }
 
-    void update(int clock){}
+    void print_visit(){
+        cout << "Illness Serverity (scale of 1-20, 1 high 20 low): " << illness_severity << endl;
+        cout << "Wait time for treatemnt took " << start_service_time - arrival_time << " minutes.\n";
+        cout << "Treatment took " << discharge_time - start_service_time << " minutes.\n";
+        cout << "Total time of visit: " << visit_time << " minutes.\n";
+    }
+
 };
 
 #endif // CURRENT_VISIT_H

@@ -15,7 +15,7 @@ using std::vector;
 class Medical_Records{
 private:
     int number_visits;
-    vector<Current_Visit *> visit_record;
+    vector<Current_Visit> visit_record;
 
 public:
     Medical_Records(){
@@ -25,24 +25,17 @@ public:
     
     void add_visit(Current_Visit * visit){
         number_visits++;
-        visit_record.push_back(visit);
-        
+        visit_record.push_back(*visit);
     }
 
     
     void print_medical_record(){
-
+        cout << "Number of visits: " << number_visits << endl;
+        cout << "List of each visit and information about it: \n";
+        //for(int i = 0; i < visit_record.size(); i++){
+        //    visit_record[i].print_visit();
+        //}
     }
-    
-    
-    /*bool operator== (const Patient * other) const {
-		if (this->patient->person->get_has_record() == other->person->get_has_record()){
-            return true;
-        }else{
-            return false;
-        }
-	}*/
-
 };
 
 #endif // MEDICAL_RECORDS_H

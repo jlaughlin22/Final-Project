@@ -13,4 +13,5 @@ using namespace std;
 int main(){
     Simulation hospital;
     hospital.run_simulation();
+    hospital.check_records();
 }

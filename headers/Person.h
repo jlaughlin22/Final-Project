@@ -16,7 +16,6 @@ using namespace std;
 
 class Person{
 private:
-    //bool has_record;
     int age;
 public:
     std::string name;
@@ -30,21 +29,9 @@ public:
         medical_history = new Medical_Records();
     }
 
-    Medical_Records * get_med_record(){
-        return medical_history;
-    }
-    
-    /* void set_has_record(){
-        has_record = !has_record;
-    }*/
-    
     bool get_can_admit(){
         return can_admit;
     }
-
-    /*bool get_has_record(){
-        return has_record;
-    }*/
 
     void set_can_admit(){
         can_admit = !can_admit;
@@ -52,6 +39,12 @@ public:
 
     int get_age(){ return age; }
 
+
+    void print_medical_record(){
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        medical_history->print_medical_record();
+    }
     
 
 

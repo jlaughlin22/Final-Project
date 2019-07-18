@@ -11,9 +11,10 @@
 #include "Random.h"
 using namespace std;
 
+extern Random my_num;
+
 class Nurse{
 private:
-    Random num;
     int service_time;
 
 public:
@@ -23,13 +24,12 @@ public:
     }
 
     void random_service(){
-        service_time = num.random_nurse_service();
+        service_time = my_num.random_nurse_service();
     }
 
     int get_service_time(){
         return service_time;
     }
-
 
 };
 

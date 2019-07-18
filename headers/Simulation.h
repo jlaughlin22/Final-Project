@@ -10,9 +10,12 @@
 #define SIMULATION_H
 #include "Hospital.h"
 #include "Person.h"
+#include "Random.h"
 #include <fstream>
 #include <iostream>
 using namespace std;
+
+Random my_num;
 
 class Simulation{
 private:
@@ -53,9 +56,13 @@ public:
         fstream fin(".\\Data\\residents_of_273ville.txt", ios::in);
         while(!fin.eof()){
             fin >> name;
-            town.push_back(new Person(45, name));
+            town.push_back(new Person(my_num.random_age(), name));
         }
         fin.close();
+    }
+
+    void check_records(){
+        hospital_simulation->records();
     }
 };
 

@@ -33,7 +33,7 @@ public:
         for(map<Doctor *, Patient *>::iterator i = doctors.begin(); i != doctors.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
             if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
                 i->second->get_visit()->set_discharge_time(clock);
-                i->second->medical_history->add_visit(i->second->get_visit());
+                i->second->get_medical_record()->add_visit(i->second->get_visit());
                 i->second->set_can_admit();
                 i = doctors.erase(i);
             }else{
@@ -45,7 +45,7 @@ public:
         for(map<Nurse *, Patient *>::iterator i = nurses.begin(); i != nurses.end(); ){// had a issue with erase and the iterators after tons of searching cited the erase from https://stackoverflow.com/questions/8234779/how-to-remove-from-a-map-while-iterating-it
             if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
                 i->second->get_visit()->set_discharge_time(clock);
-                i->second->medical_history->add_visit(i->second->get_visit());
+                i->second->get_medical_record()->add_visit(i->second->get_visit());
                 i->second->set_can_admit();
                 i = nurses.erase(i);
             }else{

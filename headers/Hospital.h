@@ -8,8 +8,9 @@
 
 #ifndef HOSPITAL_H
 #define HOSPITAL_H
-#include "Patient.h"
 #include "ServiceRoom.h"
+#include "Current_visit.h"
+#include "Medical_Records.h"
 #include <queue>
 #include <vector>
 #include "read_int.h"
@@ -40,6 +41,9 @@ public:
     }
 
     void update(int clock){
+        /*if(patient_records.size() >= 1){
+            patient_records = sort_vec(patient_records);
+        }*/
         if(Emergency_Room->get_doctors_size()!=0){
             Emergency_Room->update_doctor(clock);
         }
@@ -51,14 +55,23 @@ public:
             do{
                 possible_patient = (my_num.random_person());
             }while(town[possible_patient]->can_admit == false);
-            Patient* new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);
-
-            current_patients.push(new_pat);
-            new_pat->medical_history->increment_visit_count();
-            if(check_insert(new_pat)){
-                patient_records.push_back(new_pat);
-            }
-            new_pat->set_can_admit();
+            town[possible_patient]->can_admit = false;
+            if(search(town[possible_patient]->name, town[possible_patient]->age) == -1){
+                Patient* new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);
+                current_patients.push(new_pat);
+                //if(check_insert(new_pat)){
+                    patient_records.push_back(new_pat);
+                    int indx = search(town[possible_patient]->name, town[possible_patient]->age);
+                    dynamic_cast<Person *>(patient_records[indx])->get_medical_record()->increment_visit_count();
+                //}
+                new_pat->set_can_admit();
+            }else{
+                int indx = search(town[possible_patient]->name, town[possible_patient]->age);
+                Patient * new_pat = new Patient(clock, patient_records[indx]);
+                current_patients.push(new_pat);
+                new_pat->get_medical_record()->increment_visit_count();
+                new_pat->set_can_admit();
+            }            
         }
         if(!current_patients.empty()){
             if(current_patients.top()->get_visit()->get_illness_severity() < 11){
@@ -88,6 +101,15 @@ public:
             }
         }
     }
+
+    int search(string name, int age){
+        for(int i = 0; i < patient_records.size(); i++){
+            if (patient_records[i]->name == name && patient_records[i]->age == age){
+                return i;
+            }
+        }
+        return -1;
+    }
     bool check_insert(Patient* patient){
         for(int i = 0; i < patient_records.size(); i++){
             if (patient_records[i]->name == patient->name && patient_records[i]->age == patient->age){
@@ -97,12 +119,16 @@ public:
         return true;
     }
 
+    
+
     void average_visit_time(){
         int average_visit_time = 0;
+        int num_visits = 0;
         for(int i = 0; i < patient_records.size(); i++){
-            average_visit_time += patient_records[i]->medical_history->add_up_vists();
+            average_visit_time += dynamic_cast<Person *>( patient_records[i])->get_medical_record()->add_up_vists();
+            num_visits += dynamic_cast<Person *>( patient_records[i])->get_medical_record()->get_visit_count();
         }
-        average_visit_time /= patient_records.size();
+        average_visit_time /= num_visits;
         cout << "\nThe average visit time for each patient was: " << average_visit_time << " minutes.\n";
     }
 
@@ -171,6 +197,7 @@ int binarysearch(const vector<Person *> &items, int first, int last, string targ
 *	Template function for invoking the recursive binary search function.
 *	This is the function a user calls.
 */
+
 int binarysearch(const vector<Person *> &items, string target) {
 	return binarysearch(items, 0, items.size()-1, target);
 }
@@ -186,14 +213,11 @@ int binarysearch(const vector<Person *> &items, string target) {
             menu_input = read_int.Readint("Press 1 if you would like to see a list of all the patients treated in the emergency room.\nPress 2 if you would like to retrieve the record of a resident by their name.\nPress 3 to exit the program.\n", 1, 3);
             if(menu_input == 1){
                 for(int i = 0; i < patient_records.size(); i++ ){
-                    statement = "Name: " + patient_records[i]->name + " Age: " + to_string(patient_records[i]->age);
-                    statement.resize(35);
+                    statement = "Name: " + patient_records[i]->name + " Age: " + to_string(patient_records[i]->age) + " Number of visits: " + to_string(dynamic_cast<Person *>(patient_records[i])->get_medical_record()->get_visit_count()) + " Number of treatments: " + to_string(dynamic_cast<Person*>(patient_records[i])->get_medical_record()->get_treatment_count());
+                    statement.resize(75);
                     cout << statement;
                     if( ((i+1) % 3) == 0 ){
                         cout << endl;
-                    }
-                    if(patient_records[i]->medical_history->get_visit_count() > 1){
-                        cout << "=====================================================================================================================";
                     }
                 }
                 cout << endl;
@@ -201,7 +225,7 @@ int binarysearch(const vector<Person *> &items, string target) {
                 cout << "Enter the name of the patient: \n";
                 cin >> patient_name;
                 int indx = binarysearch(patient_records, patient_name);
-                patient_records[indx]->medical_history->print_medical_record();
+                dynamic_cast<Person *>(patient_records[indx])->get_medical_record()->print_medical_record();
             }
         }while(menu_input != 3);
     }

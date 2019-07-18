@@ -8,22 +8,25 @@
 
 #ifndef MEDICAL_RECORDS_H
 #define MEDICAL_RECORDS_H
-#include "Current_visit.h"
 #include <vector>
+#include "Current_visit.h"
 using std::vector;
 
 class Medical_Records{
 private:
     int number_visits;
+    int number_of_treatments;
     vector<Current_Visit> visit_record;
 
 public:
     Medical_Records(){
         number_visits = 0;
+        number_of_treatments = 0;
     }
 
     
     void add_visit(Current_Visit * visit){
+        number_of_treatments++;
         visit_record.push_back(*visit);
     }
 
@@ -37,6 +40,10 @@ public:
 
     int get_visit_count(){
         return number_visits;
+    }
+
+    int get_treatment_count(){
+        return number_of_treatments;
     }
 
     void increment_visit_count(){

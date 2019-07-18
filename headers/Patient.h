@@ -9,9 +9,9 @@
 
 #ifndef PATIENT_H
 #define PATIENT_H
-//#include <string>
-#include "Person.h"
 #include <vector>
+#include "Person.h"
+#include "Current_visit.h"
 using namespace std;
 
 class Patient: public Person{
@@ -19,11 +19,24 @@ private:
     int arrival_time;
     int discharge_time;
     Current_Visit * visit;
+    Person * person;
 public:
+    
+
+    Patient(int clock, Person * person){
+        this->person = person;
+        arrival_time = clock;
+        discharge_time = -1;
+        visit = new Current_Visit(arrival_time);
+        medical_history = person->get_medical_record();
+
+    }
     Patient(int clock, string name, int age): Person(age, name){
         arrival_time = clock;
         discharge_time = -1;
         visit = new Current_Visit(arrival_time);
+        medical_history = new Medical_Records();
+
     }
 
     Current_Visit * get_visit(){
@@ -39,6 +52,12 @@ public:
 			return true;
         }   
 	}
+
+    void print_medical_record(){
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        medical_history->print_medical_record();
+    }
 
 };
 

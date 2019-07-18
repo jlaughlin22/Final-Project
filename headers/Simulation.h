@@ -24,7 +24,7 @@ private:
     string name;
     int clock;
     int total_time = 10080;
-    int number_nurses = 2;
+    int number_nurses = 1;
     int number_doctors = 2;
     int arrival_rate_per_hour;
     double arrival_rate = 60/60.0;

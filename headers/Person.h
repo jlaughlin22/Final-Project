@@ -9,23 +9,26 @@
 
 #ifndef PERSON_H
 #define PERSON_H
-#include <string>
 #include <vector>
 #include "Medical_Records.h"
 using namespace std;
 
 class Person{
+protected:
+    Medical_Records *medical_history;
+
 public:
     int age;
     std::string name;
     bool can_admit;
-    Medical_Records *medical_history;
+    //Medical_Records *medical_history;
+    Person(){}
     Person(int age, string name){
         this->age = age;
         this->name = name;
         can_admit = true;
         //has_record = false;
-        medical_history = new Medical_Records();
+        //medical_history = new Medical_Records();
     }
 
     bool get_can_admit(){
@@ -33,17 +36,19 @@ public:
     }
 
     void set_can_admit(){
-        can_admit = !can_admit;
+        if(can_admit == true){
+            can_admit = false;
+        }else if(can_admit == false){
+            can_admit = true;
+        }
     }
 
     int get_age(){ return age; }
 
-
-    void print_medical_record(){
-        cout << "Name: " << name << endl;
-        cout << "Age: " << age << endl;
-        medical_history->print_medical_record();
+    Medical_Records * get_medical_record(){
+        return medical_history;
     }
+    
 
 };
 

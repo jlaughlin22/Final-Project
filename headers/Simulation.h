@@ -52,7 +52,6 @@ public:
     void run_simulation(){
         for(clock = 0; clock < total_time; ++clock){//loop arguements cited from hw07 simulator.h
             hospital_simulation->update(clock);
-            cout << "Test";
         }
         hospital_simulation->average_visit_time();
         hospital_simulation->display_menu();

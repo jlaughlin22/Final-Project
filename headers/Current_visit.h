@@ -44,8 +44,13 @@ public:
     void set_start_service_time(int clock){
         start_service_time = clock;
     }
+
     int get_start_service_time(){
         return start_service_time;
+    }
+
+    int get_visit_time(){
+        return visit_time;
     }
 
     void print_visit(){

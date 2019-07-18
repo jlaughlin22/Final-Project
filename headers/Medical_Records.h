@@ -24,17 +24,32 @@ public:
 
     
     void add_visit(Current_Visit * visit){
-        number_visits++;
         visit_record.push_back(*visit);
+    }
+
+    int add_up_vists(){
+        int total_time_spent = 0;
+        for(int i = 0; i < visit_record.size(); i++){
+            total_time_spent += visit_record[i].get_visit_time();
+        }
+        return total_time_spent;
+    }
+
+    int get_visit_count(){
+        return number_visits;
+    }
+
+    void increment_visit_count(){
+        number_visits++;
     }
 
     
     void print_medical_record(){
         cout << "Number of visits: " << number_visits << endl;
         cout << "List of each visit and information about it: \n";
-        //for(int i = 0; i < visit_record.size(); i++){
-        //    visit_record[i].print_visit();
-        //}
+        for(int i = 0; i < visit_record.size(); i++){
+            visit_record[i].print_visit();
+        }
     }
 };
 

@@ -35,14 +35,16 @@ public:
     }
 
     void get_data(){
-        cout << "total run time";
+        cout << "total run time in hours";
         cin >> total_time;
-        cout << "number of nurses";
-        cin >> number_nurses;
-        cout << "Number of doctors";
-        cin >> number_doctors;
+        total_time*60.0;
         cout << "Arrival rate";
         cin >> arrival_rate;
+        cout << "Number of doctors";
+        cin >> number_doctors;
+        cout << "number of nurses";
+        cin >> number_nurses;
+        
     }
 
     void run_simulation(){

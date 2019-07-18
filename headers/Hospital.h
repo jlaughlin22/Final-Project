@@ -11,7 +11,7 @@
 //#include "Medical_Records.h"
 //#include "Person.h"
 #include "Patient.h"
-#include "ServiceMap.h"
+#include "ServiceRoom.h"
 #include <queue>
 #include <vector>
 #include "Random.h"
@@ -26,7 +26,7 @@ private:
     priority_queue<Patient *> current_patients;
     vector<Patient*> patient_records;
     double arrival_rate;
-    ServiceMap * Emergancy_Room;
+    ServiceRoom * Emergancy_Room;
     int number_doctors;
     int number_nurses;
 
@@ -36,7 +36,7 @@ public:
         this->arrival_rate = arrival_rate / 60.0;
         this->number_doctors = number_doctors;
         this->number_nurses = number_nurses;
-        Emergancy_Room = new ServiceMap(number_doctors, number_nurses);
+        Emergancy_Room = new ServiceRoom(number_doctors, number_nurses);
     }
 
     void update(int clock){

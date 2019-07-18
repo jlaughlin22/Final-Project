@@ -17,14 +17,14 @@
 #include "Random.h"
 using namespace std;
 
-class ServiceMap{
+class ServiceRoom{
 private:
     map<Doctor *, Patient*> doctors;
     map<Nurse *, Patient*> nurses;
     int num_nurses;
     int num_doctors;
 public:
-    ServiceMap(int num_doctors, int num_nurses){
+    ServiceRoom(int num_doctors, int num_nurses){
         this->num_doctors = num_doctors;
         this->num_nurses = num_nurses;
     }

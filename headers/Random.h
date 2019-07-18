@@ -40,14 +40,6 @@ public:
     double random_dbl(){
         return double(rand()) / RAND_MAX;
     }
-    
-    int random_doc_service(){
-        return (rand() % 20 ) + 1;
-    }
-
-    int random_nurse_service(){
-        return (rand() % 10 ) + 1;
-    }
 
     int random_age(){
         return (rand()%112) + 1;

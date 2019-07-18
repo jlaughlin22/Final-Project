@@ -24,7 +24,7 @@ public:
     }
 
     void random_service(){
-        service_time = my_num.random_nurse_service();
+        service_time = my_num.random_time(10);
     }
 
     int get_service_time(){

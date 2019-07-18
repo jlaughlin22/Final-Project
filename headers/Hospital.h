@@ -33,17 +33,15 @@ private:
 
 public:
     Hospital(vector<Person *> town, double arrival_rate, int number_doctors, int number_nurses){
-        this->town = town;
+        this->town = sort_vec(town);
         this->arrival_rate = arrival_rate;
         this->number_doctors = number_doctors;
         this->number_nurses = number_nurses;
-        Emergency_Room = new ServiceRoom(number_doctors, number_nurses);
+        Emergency_Room = new ServiceRoom(number_doctors, number_nurses, this->town);
     }
 
     void update(int clock){
-        /*if(patient_records.size() >= 1){
-            patient_records = sort_vec(patient_records);
-        }*/
+        int possible_patient;
         if(Emergency_Room->get_doctors_size()!=0){
             Emergency_Room->update_doctor(clock);
         }
@@ -51,19 +49,16 @@ public:
             Emergency_Room->update_nurse(clock);
         }
         if(my_num.random_dbl() < arrival_rate){
-            int possible_patient;
             do{
                 possible_patient = (my_num.random_person());
             }while(town[possible_patient]->can_admit == false);
             town[possible_patient]->can_admit = false;
             if(search(town[possible_patient]->name, town[possible_patient]->age) == -1){
-                Patient* new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);
+                Patient* new_pat = new Patient(clock, town[possible_patient]);
                 current_patients.push(new_pat);
-                //if(check_insert(new_pat)){
-                    patient_records.push_back(new_pat);
-                    int indx = search(town[possible_patient]->name, town[possible_patient]->age);
-                    dynamic_cast<Person *>(patient_records[indx])->get_medical_record()->increment_visit_count();
-                //}
+                patient_records.push_back(new_pat);
+                int indx = search(town[possible_patient]->name, town[possible_patient]->age);
+                dynamic_cast<Person *>(patient_records[indx])->get_medical_record()->increment_visit_count();
                 new_pat->set_can_admit();
             }else{
                 int indx = search(town[possible_patient]->name, town[possible_patient]->age);

@@ -15,18 +15,21 @@
 #include "Doctor.h"
 #include "Nurse.h"
 #include"Caretaker.h"
+#include "binary_sort_person.h"
 using namespace std;
 
 class ServiceRoom{
 private:
     map<Doctor *, Patient*> doctors;
     map<Nurse *, Patient*> nurses;
+    vector<Person *> town;
     int num_nurses;
     int num_doctors;
 public:
-    ServiceRoom(int num_doctors, int num_nurses){
+    ServiceRoom(int num_doctors, int num_nurses, vector<Person *> town){
         this->num_doctors = num_doctors;
         this->num_nurses = num_nurses;
+        this->town = town;
     }
 
     void update_doctor(int clock){

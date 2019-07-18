@@ -31,13 +31,6 @@ public:
         medical_history = person->get_medical_record();
 
     }
-    Patient(int clock, string name, int age): Person(age, name){
-        arrival_time = clock;
-        discharge_time = -1;
-        visit = new Current_Visit(arrival_time);
-        medical_history = new Medical_Records();
-
-    }
 
     Current_Visit * get_visit(){
         return visit;

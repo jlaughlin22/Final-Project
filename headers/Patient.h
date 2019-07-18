@@ -14,15 +14,13 @@
 #include <vector>
 using namespace std;
 
-class Patient{
+class Patient: public Person{
 private:
     int arrival_time;
     int discharge_time;
     Current_Visit * visit;
 public:
-    Person * person;
-    Patient(int clock, Person * person){
-        this->person = person;
+    Patient(int clock, string name, int age): Person(age, name){
         arrival_time = clock;
         discharge_time = -1;
         visit = new Current_Visit(arrival_time);
@@ -33,12 +31,13 @@ public:
     }
 
 	bool operator< (const Patient& other) const {
-		if (this->visit->get_illness_severity() > other.visit->get_illness_severity())
+		if (this->visit->get_illness_severity() > other.visit->get_illness_severity()){
 			return true;
-		else if (this->visit->get_illness_severity() > other.visit->get_illness_severity())
+        }else if (this->visit->get_illness_severity() > other.visit->get_illness_severity()){
 			return false;
-		else
+        }else{
 			return true;
+        }   
 	}
 
 };

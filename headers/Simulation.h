@@ -63,8 +63,8 @@ public:
         fin.close();
     }
 
-    void check_records(){
-        hospital_simulation->records();
+    void menu(){
+        
     }
 };
 

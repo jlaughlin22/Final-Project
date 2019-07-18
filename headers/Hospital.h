@@ -21,7 +21,7 @@ class Hospital{
 private:
     vector<Person *> town;
     priority_queue<Patient *> current_patients;
-    vector<Patient*> patient_records;
+    vector<Person*> patient_records;
     double arrival_rate;
     ServiceRoom * Emergency_Room;
     int number_doctors;
@@ -42,12 +42,12 @@ public:
             do{
                 possible_patient = (my_num.random_person());
             }while(town[possible_patient]->can_admit != true);
-            Patient * new_pat = new Patient(clock, town[possible_patient]);
+            Patient * new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);
             current_patients.push(new_pat);
             if(check_insert(new_pat)){
                 patient_records.push_back(new_pat);
             }
-            new_pat->person->set_can_admit();
+            new_pat->set_can_admit();
             //cout << "New person in waiting room" << endl;
         }
         if(!current_patients.empty()){
@@ -77,21 +77,15 @@ public:
                 }
             }
         }
+        cout << patient_records.size() << endl;
     }
-    bool check_insert(Patient* patient){
+    bool check_insert(Person* person){
         for(int i = 0; i < patient_records.size(); i++){
-            if (patient_records[i]->person == patient->person){
+            if (patient_records[i]->name == person->name && patient_records[i]->age == person->age){
                 return false;
             }
         }
         return true;
-    }
-
-    void records(){
-        cout << patient_records.size();
-        /*for (int i = 0; i < patient_records.size(); i++){
-            patient_records[i]->person->print_medical_record();
-        }*/
     }
 
     void menu(){

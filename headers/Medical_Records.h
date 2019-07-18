@@ -58,6 +58,7 @@ public:
             visit_record[i].print_visit();
         }
     }
+    
 };
 
 #endif // MEDICAL_RECORDS_H

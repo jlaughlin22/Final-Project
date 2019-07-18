@@ -33,11 +33,11 @@ private:
 
 public:
     Hospital(vector<Person *> town, double arrival_rate, int number_doctors, int number_nurses){
-        this->town = sort_vec(town);
+        this->town = town;
         this->arrival_rate = arrival_rate;
         this->number_doctors = number_doctors;
         this->number_nurses = number_nurses;
-        Emergency_Room = new ServiceRoom(number_doctors, number_nurses, this->town);
+        Emergency_Room = new ServiceRoom(number_doctors, number_nurses);
     }
 
     void update(int clock){
@@ -52,9 +52,10 @@ public:
             do{
                 possible_patient = (my_num.random_person());
             }while(town[possible_patient]->can_admit == false);
-            town[possible_patient]->can_admit = false;
+            //town[possible_patient]->can_admit = false;
             if(search(town[possible_patient]->name, town[possible_patient]->age) == -1){
-                Patient* new_pat = new Patient(clock, town[possible_patient]);
+                //patient_records.push_back(town[possible_patient]);
+                Patient* new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);
                 current_patients.push(new_pat);
                 patient_records.push_back(new_pat);
                 int indx = search(town[possible_patient]->name, town[possible_patient]->age);

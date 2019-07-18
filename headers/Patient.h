@@ -21,7 +21,13 @@ private:
     Current_Visit * visit;
     Person * person;
 public:
-    
+    Patient(int clock, string name, int age): Person(age, name){
+        arrival_time = clock;
+        discharge_time = -1;
+        visit = new Current_Visit(arrival_time);
+        medical_history = new Medical_Records();
+
+    }
 
     Patient(int clock, Person * person){
         this->person = person;

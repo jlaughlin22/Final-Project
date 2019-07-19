@@ -101,6 +101,9 @@ public:
      * Sorts by name
      */
     vector<Person* > sort_vec(vector<Person*> vec){
+        if(vec.size() <=0){
+            return vec;
+        }
         return binarySort(vec, vec.size());//return the sorted vector
     }
 

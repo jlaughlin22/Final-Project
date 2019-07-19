@@ -41,7 +41,7 @@ public:
      *Uses Readint to gather data values
     */
     void get_data(){
-        cout << "Welcome to the 273ville Emergency room simulation. There are just a few vaules that you need to enter before the simulation is able to start.\n";//welcome user to simulation
+        cout << "Welcome to the 273ville Emergency room simulation. There are just a few values that you need to enter before the simulation is able to start.\n";//welcome user to simulation
         total_time = Readint.Readint("Enter the total time in hours the simulation should simulate for (7*24*60 is 168): ", 0, INT_MAX);//gather amount of time simulation should simulate
         total_time *= 60.0;//convert hours to minutes
         arrival_rate_per_hour = Readint.Readint("Enter the arrival rate of patients per hour (no more then 60 per hour): ", 1, 60);//gather arrival rate of patients per hour

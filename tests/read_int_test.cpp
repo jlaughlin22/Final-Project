@@ -5,15 +5,15 @@
  * Final Project CS273
  * Emergency Room Simulator
  */
-/*
+
 #include "read_int.h"
 #include "gtest/gtest.h"
 #include <vector>
 #include <iostream>
 using namespace std;
 read_int test;
-
-/Testing if a lower value is entered that is greater than the high value 
+/*
+//Testing if a lower value is entered that is greater than the high value 
 TEST(Readint_TEST, low_greater_than_high){
     auto func = []() { 
         test.Readint("prompt", 24, 9);
@@ -40,5 +40,4 @@ int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-
 */

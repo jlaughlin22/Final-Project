@@ -35,7 +35,7 @@ private:
     }
 
     /**
-     * returns where vale should go in an array
+     * returns where value should go in an array
      */
     int binary_search(Person ** items, int first, int last, Person * target) {//cited from previous homewok assignments from cs172
         int pivot = ( (last - first) / 2 ) + first;//creats pivot point in middle of given range

@@ -11,14 +11,22 @@
 #include "Caretaker.h"
 using namespace std;
 
-class Nurse: public Caretaker{
+class Nurse: public Caretaker{//Public Caretake Nurse is a caretaker
 public:
+
+    /**
+     * Constructor
+     * When made creates a random service time for this instance
+     */
     Nurse(): Caretaker(){
         random_service();
     }
 
+    /**
+     * Random service time for patient ie how long takes this nurse to treat the patient
+     */
     void random_service(){
-        service_time = my_num.random_time(10);
+        service_time = my_num.random_time(10);//random value between 1 and 10
     }
 };
 

@@ -11,6 +11,6 @@
 using namespace std;
 
 int main(){
-    Simulation hospital;
-    hospital.run_simulation();
+    Simulation hospital;//create hospital simulation
+    hospital.run_simulation();//run the simulation
 }

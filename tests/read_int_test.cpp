@@ -29,7 +29,7 @@ TEST(Readint_TEST, regular){
 }
 
 //checking if low and high are same value
-TEST(Readint_TEST, zeros){// Pickup Test 2
+TEST(Readint_TEST, zeros){
     auto func = []() { 
         test.Readint("prompt", 0, 0);
     };

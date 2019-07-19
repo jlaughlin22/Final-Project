@@ -18,6 +18,7 @@ protected:
     Medical_Records *medical_history;
 
 public:
+    int id_num;
     int age;
     std::string name;
     Person(){}
@@ -30,7 +31,6 @@ public:
     Medical_Records * get_medical_record(){
         return medical_history;
     }
-
 
     bool operator== (const Person * other) const{
         if(this->age == other->age && this->name == other->name && this->medical_history == other->medical_history){

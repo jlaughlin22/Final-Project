@@ -46,12 +46,12 @@ public:
 
     void update(int clock){
         int possible_patient;
-        if(Emergency_Room->get_doctors_size()!=0){
+        /*if(Emergency_Room->get_doctors_size()!=0){
             Emergency_Room->update_doctor(clock);
         }
         if(Emergency_Room->get_nurses_size()!=0){
             Emergency_Room->update_nurse(clock);
-        }
+        }*/
         if(my_num.random_dbl() < arrival_rate){
             possible_patient = (my_num.random_person());  
             if(search(town[possible_patient]->name, town[possible_patient]->age) == -1){
@@ -122,9 +122,9 @@ public:
             num_treaments += dynamic_cast<Person *>( patient_records[i])->get_medical_record()->get_treatment_count();
         }
         average_visit_time /= num_visits;
-        cout << "The average visit time for each patient was: " << average_visit_time << " minutes.\n\n";
+        cout << "The average visit time for each patient was: " << average_visit_time << " minutes.\n";
         /*cout << "Total number of visits before treatment: " << num_visits << endl; testing
-        cout << "Total number visitors treated: "<< num_treaments << endl;*/ //testing
+        cout << "Total number visitors treated: "<< num_treaments << endl; testing*/
     }
 
     void rem_zero_treatments(){
@@ -146,11 +146,14 @@ public:
         rem_zero_treatments();
         patient_records = person_sort.sort_vec(patient_records);
         do{
-            menu_input = read_int.Readint("Press 1 if you would like to see a list of all residents treated in the emergency room.\nPress 2 if you would like to retrieve the medical records of a resident by their name.\nPress 3 to exit the program.\n", 1, 3);
+            menu_input = read_int.Readint("\nPress 1 if you would like to see a list of all residents treated in the emergency room.\nPress 2 if you would like to retrieve the medical records of a resident by their name.\nPress 3 to exit the program.\n", 1, 3);
             if(menu_input == 1){
                 for(int i = 0; i < patient_records.size(); i++ ){
-                    statement = "Name: " + patient_records[i]->name + " Age: " + to_string(patient_records[i]->age) + " Number of visits: " + to_string(dynamic_cast<Person *>(patient_records[i])->get_medical_record()->get_visit_count()) + " Number of treatments: " + to_string(dynamic_cast<Person*>(patient_records[i])->get_medical_record()->get_treatment_count());
-                    statement.resize(75);
+                    statement = "Name: " + patient_records[i]->name; /*Tthe following is for testing  + " Number of visits: " + to_string(dynamic_cast<Person *>(patient_records[i])->get_medical_record()->get_visit_count()) + " Number of treatments: " + to_string(dynamic_cast<Person*>(patient_records[i])->get_medical_record()->get_treatment_count());*/
+                    statement.resize(18);
+                    cout << statement;
+                    statement = "Age: " + to_string(patient_records[i]->age);
+                    statement.resize(15);
                     cout << statement;
                     if( ((i+1) % 3) == 0 ){
                         cout << endl;
@@ -159,9 +162,9 @@ public:
                 cout << endl;
             }else if(menu_input == 2){
                 do{
-                    cout << "Enter the name of the patient: \n";
+                    cout << "Enter the name of the resident you would like to see the medical records of (this is case sensitive first letter must be capitalized): ";
                     cin >> patient_name;
-                }while(person_sort.binarysearch(patient_records, patient_name) != -1);
+                }while(person_sort.binarysearch(patient_records, patient_name) == -1);
                 int indx = person_sort.binarysearch(patient_records, patient_name);
                 dynamic_cast<Person *>(patient_records[indx])->get_medical_record()->print_medical_record();
             }

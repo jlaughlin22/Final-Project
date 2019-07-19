@@ -27,7 +27,7 @@ private:
     int number_nurses = 2;
     int number_doctors = 2;
     int arrival_rate_per_hour;
-    double arrival_rate = 40/60.0;
+    double arrival_rate = 15/60.0;
     Hospital * hospital_simulation;
     vector<Person *> town;
 public:

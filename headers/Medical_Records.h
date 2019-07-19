@@ -52,7 +52,7 @@ public:
 
     
     void print_medical_record(){
-        cout << "Number of visits: " << number_visits << endl;
+        cout << "\nNumber of visits: " << number_visits << endl;
         cout << "List of each visit and information about it: \n";
         for(int i = 0; i < visit_record.size(); i++){
             visit_record[i].print_visit();

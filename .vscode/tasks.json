@@ -29,10 +29,10 @@
 			"args": [
 				"-o", "${workspaceFolder}/bin/testmain.exe",
 				"-I", "${workspaceFolder}/headers",
-				"-I", "C:/Users/tucke/source/googletest/googletest/include",
-				"-I", "C:/Users/tucke/source/googletest/googletest",
+				"-I", "C:/Users/David/Desktop/google_test/googletest/include",
+				"-I", "C:/Users/David/Desktop/google_test/googletest",
 				"-ggdb", "${workspaceFolder}/tests/*.cpp", "${workspaceFolder}/source/*.cpp",
-				"C:/Users/tucke/source/googletest/googletest/src/gtest-all.cc"			],
+				"C:/Users/David/Desktop/google_test/googletest/src/gtest-all.cc"			],
 			"group": {
 				"kind":"build",
 				"isDefault":true

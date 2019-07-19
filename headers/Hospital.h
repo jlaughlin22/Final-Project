@@ -60,12 +60,12 @@ public:
         }
         if(my_num.random_dbl() < arrival_rate){//if a patient can arrive
             possible_patient = (my_num.random_person()); //get a random resident 
-            if(search(town[possible_patient]->name, town[possible_patient]->age) == -1){//if patient is not in records
+            if(search(patient_records, town[possible_patient]->name, town[possible_patient]->age) == -1){//if patient is not in records
                 Patient* new_pat = new Patient(clock, town[possible_patient]->name, town[possible_patient]->age);// create a new patient
                 current_patients.push(new_pat);//add patient to queue
                 patient_records.push_back(new_pat);//add patient to records
             }else{//if patient exists in records
-                int indx = search(town[possible_patient]->name, town[possible_patient]->age);//find index of patient
+                int indx = search(patient_records, town[possible_patient]->name, town[possible_patient]->age);//find index of patient
                 Patient * new_pat = new Patient(clock, patient_records[indx]);//copy patient info
                 current_patients.push(new_pat);//add patient at index to queue
             }            
@@ -103,9 +103,9 @@ public:
      * Searches for a patient in the hospital records
      * searches by name and age
      */
-    int search(string name, int age){
-        for(int i = 0; i < patient_records.size(); i++){//iterates through vector of records
-            if (patient_records[i]->name == name && patient_records[i]->age == age){//if has same age and name then same person
+    int search(vector<Person *> vec, string name, int age){
+        for(int i = 0; i < vec.size(); i++){//iterates through vector of records
+            if (vec[i]->name == name && vec[i]->age == age){//if has same age and name then same person
                 return i;//return index of person
             }
         }
@@ -124,10 +124,11 @@ public:
             average_visit_time += dynamic_cast<Person *>( patient_records[i])->get_medical_record()->add_up_vists();//adds together each persons total visits time
             num_visits += dynamic_cast<Person *>( patient_records[i])->get_medical_record()->get_visit_count();//adds together each persons number of visits
         }
+        //cout << average_visit_time << endl;
         average_visit_time /= num_visits;//calculates the average visit of each person
         cout << "The average visit time for each patient was: " << average_visit_time << " minutes.\n";//displays the average visit per person
-        /*cout << "Total number of visits before treatment: " << num_visits << endl; testing
-        cout << "Total number visitors treated: "<< num_treaments << endl; testing*/
+        //cout << "Total number of visits before treatment: " << num_visits << endl;
+        //cout << "Total number visitors treated: "<< num_treaments << endl;
     }
 
     /**
@@ -152,7 +153,7 @@ public:
         string statement = "";//holds name and age in listing all names
         string patient_name;//holds name of the patient
         int menu_input;//holds the menu input from the user
-        rem_zero_treatments();//removes and peerson with zero visits see above for more details
+        rem_zero_treatments();//removes any person with zero visits see above for more details
         patient_records = person_sort.sort_vec(patient_records);//sorts the patients records by name
         do{//do until user exits via 3
             menu_input = read_int.Readint("\nPress 1 if you would like to see a list of all residents treated in the emergency room.\nPress 2 if you would like to retrieve the medical records of a resident by their name.\nPress 3 to exit the program.\n", 1, 3);//gathers input from user

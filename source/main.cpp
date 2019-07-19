@@ -9,8 +9,8 @@
 //#include <iostream>
 #include "Simulation.h"
 using namespace std;
-
+/*
 int main(){
     Simulation hospital;//create hospital simulation
     hospital.run_simulation();//run the simulation
-}
+}*/

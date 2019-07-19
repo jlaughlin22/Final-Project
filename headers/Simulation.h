@@ -22,17 +22,17 @@ class Simulation{
 private:
     read_int Readint;//readint for gather values from user, based of ranges
     int clock;//current time
-    int total_time = 10080;//holds total time of simulation will be converted to minute upon entry
-    int number_nurses = 2;//holds number of nurses working for simulation
-    int number_doctors = 2;//holds number of doctors working for simulation
+    int total_time;//holds total time of simulation will be converted to minute upon entry
+    int number_nurses;//holds number of nurses working for simulation
+    int number_doctors;//holds number of doctors working for simulation
     int arrival_rate_per_hour;//holds number of patients in form patients per hour
-    double arrival_rate = 15/60.0;//holds arrival rate of patients in form patients per minute
+    double arrival_rate;//holds arrival rate of patients in form patients per minute
     Hospital * hospital_simulation;//pointer to the hospital simulation
     vector<Person *> town;//list of residents from town
 public:
     Simulation(){
         create_273ville();//intitializes a vector of the town with each person from the town
-        //get_data();// Gather the required data feilds from the user
+        get_data();// Gather the required data feilds from the user
         hospital_simulation = new Hospital(town, arrival_rate, number_doctors, number_nurses);// creates a new hospital simulation
     }
 

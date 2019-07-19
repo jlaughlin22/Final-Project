@@ -78,7 +78,7 @@ public:
      */
     void print_medical_record(){
         cout << "\nNumber of visits: " << number_visits << endl;//Displays the number of visits
-        cout << "List of each visit and information about it: \n";
+        cout << "History of each visit to the hospital and a detailed description about it: \n";
         for(int i = 0; i < visit_record.size(); i++){//lists each visit and a little bit of information about it
             visit_record[i].print_visit();//Calls Current_visit print method
         }

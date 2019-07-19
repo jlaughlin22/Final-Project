@@ -116,4 +116,4 @@ public:
     }
 };
 
-#endif // BINARY_SORT_H
+#endif // BINARY_SORT_PERSON_H

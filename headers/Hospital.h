@@ -70,7 +70,7 @@ public:
                 current_patients.push(new_pat);//add patient at index to queue
             }            
         }
-        if(!current_patients.empty()){
+        if(!current_patients.empty()){//if there is a patient in the priority queue
             if(current_patients.top()->get_visit()->get_illness_severity() < 11){//if top patient has a priority 10 illness or lower
                 if(!Emergency_Room->nurse_is_full()){//if there is an open nurse to treat a patient
                     Emergency_Room->service_patient_nurse(current_patients.top(), clock);//send top patient to be serviced by nurse

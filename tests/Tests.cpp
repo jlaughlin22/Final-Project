@@ -1,10 +1,10 @@
-/**
+/*/**
  * Author: Jonathan Laughlin
  * Date Created: 7/17/19
  * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
- */
+ 
 
 #include "read_int.h"
 #include "Hospital.h"
@@ -126,4 +126,4 @@ void verify_bin_search(vector<Person *> vec, string name, int expected){
     }else{
         cout << "Failed\n";//not the same fail
     }
-}
+}*/

@@ -11,19 +11,29 @@
 #include "Random.h"
 using namespace std;
 
-extern Random my_num;
+extern Random my_num; //Allows access to the global variable defined in Simulation.h 
 
-class Caretaker{
+class Caretaker{//Pure virtual class
 protected:
-    int service_time;
-
+    int service_time;//Holds the service time of the caretaker
 public:
+
+    /**
+     * Constructor
+     */
     Caretaker(){
-        service_time = 0;
+        service_time = 0;//sets service time to 0
     }
 
+
+    /**
+     * Pure virtual method all subclasses must implement
+     */
     virtual void random_service() = 0;
 
+    /**
+     * Returns the service time of the caretaker
+     */
     int get_service_time(){
         return service_time;
     }

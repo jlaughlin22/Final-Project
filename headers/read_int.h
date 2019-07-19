@@ -17,29 +17,36 @@ using namespace std;
 
 class read_int{
 public:
+
+    /**
+     * Empty Constructor
+     */
     read_int(){}
 
-    int Readint(const string &prompt, int low, int high){//help writing this from hw06 readint.cpp
-        if(low >= high){
-            throw invalid_argument("Invalid range has been entered.");
+    /**
+     * Cited from hw06 readint.cpp
+     */
+    int Readint(const string &prompt, int low, int high){
+        if(low >= high){//If outside range
+            throw invalid_argument("Invalid range has been entered.");//throw invalid argument
         }
         cin.exceptions(ios_base::failbit);
-        int value = 0;
-        while(true){
-            try{
-                while(true){
-                    cout << prompt;
-                    cin >> value;
-                    if(value >= low && value <= high){
-                        cout << endl;
-                        return value;
+        int value = 0;//Holds value user enters
+        while(true){//Loop until value within range is entered
+            try{//Try this
+                while(true){//Loops until a value between range is entered
+                    cout << prompt;//Display prompt
+                    cin >> value;//Gather value
+                    if(value >= low && value <= high){//If value is within range
+                        cout << endl;//New line
+                        return value;//Return value entered
                     }
                 }
             }
-            catch(ios_base::failure){
-                cout << "Bad entry please retry.\n";
-                cin.clear();
-                cin.ignore(numeric_limits<int>::max(), '\n');
+            catch(ios_base::failure){//cath any exceptions thrown
+                cout << "Bad entry please retry.\n";//Bad entry
+                cin.clear();//Clears cin stream
+                cin.ignore(numeric_limits<int>::max(), '\n');//Removes any values from cin
             }
         }
     }

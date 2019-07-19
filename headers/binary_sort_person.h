@@ -1,7 +1,7 @@
 /**
  * Author: Jonathan Laughlin
  * Date Created: 7/17/19
- * Date Last Modified: 7/17/19
+ * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
  */
@@ -56,7 +56,7 @@ private:
         }
     }
 
-int binarysearch(const vector<Person *> &items, int first, int last, string target) {
+int binarysearch(const vector<Person*> &items, int first, int last, string target) {
 	int pivot = ( (last - first) / 2 ) + first;
     if(last < first){ //if pass each other
         return -1;
@@ -69,6 +69,7 @@ int binarysearch(const vector<Person *> &items, int first, int last, string targ
     }
 }
 
+
 public:
     binary_sort_person(){}
 
@@ -76,10 +77,9 @@ public:
         return binarySort(vec, vec.size());
     }
 
-    int binarysearch(const vector<Person *> &items, string target) {
+    int binarysearch(const vector<Person*> &items, string target) {
 	    return binarysearch(items, 0, items.size()-1, target);
     }
-
 };
 
 #endif // BINARY_SORT_H

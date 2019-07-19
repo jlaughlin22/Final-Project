@@ -1,7 +1,7 @@
 /**
  * Author: Jonathan Laughlin
  * Date Created: 7/16/19
- * Date Last Modified: 7/16/19
+ * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
  */
@@ -58,6 +58,14 @@ public:
         cout << "Wait time for treatemnt took " << start_service_time - arrival_time << " minutes.\n";
         cout << "Treatment took " << discharge_time - start_service_time << " minutes.\n";
         cout << "Total time of visit: " << visit_time << " minutes.\n";
+    }
+
+    bool operator== (const Current_Visit& other) const{
+        if(this->arrival_time == other.arrival_time && this->discharge_time == other.discharge_time && this->illness_severity == other.illness_severity && this->start_service_time == other.start_service_time && this->visit_time == other.visit_time){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 };

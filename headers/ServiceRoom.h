@@ -1,7 +1,7 @@
 /**
  * Author: Jonathan Laughlin
  * Date Created: 7/16/19
- * Date Last Modified: 7/17/19
+ * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
  */
@@ -15,7 +15,6 @@
 #include "Doctor.h"
 #include "Nurse.h"
 #include"Caretaker.h"
-//#include "binary_sort_person.h"
 using namespace std;
 
 class ServiceRoom{
@@ -35,7 +34,7 @@ public:
             if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
                 i->second->get_visit()->set_discharge_time(clock);
                 i->second->get_medical_record()->add_visit(i->second->get_visit());
-                i->second->set_can_admit();
+                i->second->get_medical_record()->increment_visit_count();
                 i = doctors.erase(i);
             }else{
                 ++i;
@@ -47,7 +46,7 @@ public:
             if(clock - (i->second->get_visit()->get_start_service_time()) > i->first->get_service_time()){
                 i->second->get_visit()->set_discharge_time(clock);
                 i->second->get_medical_record()->add_visit(i->second->get_visit());
-                i->second->set_can_admit();
+                i->second->get_medical_record()->increment_visit_count();
                 i = nurses.erase(i);
             }else{
                 ++i;

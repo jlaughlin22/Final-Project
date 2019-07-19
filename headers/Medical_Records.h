@@ -1,7 +1,7 @@
 /**
  * Author: Jonathan Laughlin
  * Date Created: 7/16/19
- * Date Last Modified: 7/16/19
+ * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
  */
@@ -56,6 +56,14 @@ public:
         cout << "List of each visit and information about it: \n";
         for(int i = 0; i < visit_record.size(); i++){
             visit_record[i].print_visit();
+        }
+    }
+
+    bool operator== (const Medical_Records& other) const{
+        if(this->number_of_treatments == other.number_of_treatments && this->number_visits == other.number_visits && this->visit_record == other.visit_record){
+            return true;
+        }else{
+            return false;
         }
     }
     

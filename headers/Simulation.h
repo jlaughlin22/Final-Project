@@ -1,7 +1,7 @@
 /**
  * Author: Jonathan Laughlin
  * Date Created: 7/16/19
- * Date Last Modified: 7/17/19
+ * Date Last Modified: 7/19/19
  * Final Project CS273
  * Emergency Room Simulator
  */
@@ -24,12 +24,12 @@ private:
     string name;
     int clock;
     int total_time = 10080;
-    int number_nurses = 1;
+    int number_nurses = 2;
     int number_doctors = 2;
     int arrival_rate_per_hour;
-    double arrival_rate = 60/60.0;
+    double arrival_rate = 40/60.0;
     Hospital * hospital_simulation;
-    vector<Person*> town;
+    vector<Person *> town;
 public:
     Simulation(){
         create_273ville();

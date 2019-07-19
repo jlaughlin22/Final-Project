@@ -6,7 +6,6 @@
  * Emergency Room Simulator
  */
 
-
 #ifndef PERSON_H
 #define PERSON_H
 #include <vector>
@@ -15,25 +14,38 @@ using namespace std;
 
 class Person{
 protected:
-    Medical_Records *medical_history;
+    Medical_Records *medical_history;//Pointer to this persons medical records
 
 public:
-    int id_num;
-    int age;
-    std::string name;
-    Person(){}
-    Person(int age, string name){
-        this->age = age;
-        this->name = name;
-    }
-    int get_age(){ return age; }
+    int age;//Holds age
+    string name;//Holds name
 
+    /**
+     * Empty Constructor
+     */
+    Person(){}
+
+    /**
+     * Constructor of Person
+     */
+    Person(int age, string name){
+        this->age = age;//Sets value of age
+        this->name = name;//Sets value of name
+    }
+
+    /**
+     * Returns a pointer to the medical history of this person
+     */
     Medical_Records * get_medical_record(){
         return medical_history;
     }
 
+    /**
+     * Overload of ==
+     * Determines if this person is equal to the other person
+     */
     bool operator== (const Person * other) const{
-        if(this->age == other->age && this->name == other->name && this->medical_history == other->medical_history){
+        if(this->age == other->age && this->name == other->name && this->medical_history == other->medical_history){//if name age and medical history are same then same person
             return true;
         }else{
             return false;
